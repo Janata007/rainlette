@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:rainlette/screens/loading.dart';
 import 'package:rainlette/screens/login_screen.dart';
 
-void main() {
+void main() async{
+  await GetStorage.init();
   runApp(MyApp());
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_storage/get_storage.dart';
 
 const semiBlue = Color.fromRGBO(143,167,196,1);
 const  lightBlue = Color.fromRGBO(210,236,249,1);
@@ -7,6 +8,7 @@ const lightGray = Color.fromRGBO(216,220,220, 1);
 const darkBlue =Color.fromRGBO(36,60,108,1);
 final logo = Image.asset("assets/logo_nogb.png",
     width: 180, height: 180);
+final storage = GetStorage();
 
 const kLinearGradient = LinearGradient(
   begin: Alignment.topLeft,

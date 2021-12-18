@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'login_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -17,9 +19,11 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   String _username = "";
   String _password = "";
+  String _password2 = "";
   bool _passwordVisible = false;
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _passwordTextController2 = TextEditingController();
 
   final pref = getSharedPreferences();
 
@@ -27,7 +31,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void initState() {
     super.initState();
     _passwordVisible = false;
-    _restoreUsernameAndPassword();
   }
 
   @override
@@ -38,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       validator: (val) => val!.isEmpty ? 'enter username' : null,
       onSaved: (val) => _username = val!,
     );
-    final password = TextFormField(
+    final password1 = TextFormField(
       obscureText: !_passwordVisible,
       decoration: InputDecoration(
         hintText: "Password",
@@ -57,6 +60,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
       validator: (val) => val!.isEmpty ? 'enter password' : null,
       onSaved: (val) => _password = val!,
     );
+    final password2 = TextFormField(
+      obscureText: !_passwordVisible,
+      decoration: InputDecoration(
+        hintText: "Re-enter password",
+        suffixIcon: IconButton(
+            icon: Icon(
+              _passwordVisible ? Icons.visibility : Icons.visibility_off,
+              color: darkBlue,
+            ),
+            onPressed: () {
+              setState(() {
+                _passwordVisible = !_passwordVisible;
+              });
+            }),
+      ),
+      controller: _passwordTextController2,
+      validator: (val) => val!.isEmpty ? 'enter password' : null,
+      onSaved: (val) => _password = val!,
+    );
 
     return Scaffold(
       backgroundColor: semiBlue,
@@ -72,57 +94,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[logo]),
+          Row(mainAxisAlignment: MainAxisAlignment.center ,
+          children: [Text("REGISTER",
+            style: TextStyle(fontSize: 20, color: darkBlue, fontWeight: FontWeight.bold),)],),
           const SizedBox(
             height: 48.0,
           ),
           username,
           const SizedBox(height: 8.0),
-          password,
+          password1,
+          const SizedBox(height: 8.0),
+          password2,
           const SizedBox(height: 24.0),
-          MyButton(label: "Log in", onPressed: submit),
+          MyButton(label: "Register", onPressed: register),
         ],
       ))),
     );
   }
 
-  void _restoreUsernameAndPassword() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _username = prefs.getString('username') ?? '';
-      _password = prefs.getString('password') ?? '';
-      _usernameTextController.text = _username;
-      _passwordTextController.text = _password;
-    });
-  }
 
-  void submit() {
-    if (_username == "" || _password == "") {
-      _loginErrorDialog();
-    } else {
+  void register() {
+    _username = _usernameTextController.text;
+    _password = _passwordTextController.text;
+    _password2 = _passwordTextController2.text;
+
+    if(_password.compareTo(_password2)!=0|| _username=="" || _password=="" || _password2=="") {
+      _registerErrorDialog();
+    }
+    else {
       _rememberUsernameAndPassword();
-      redirectToHome();
+      redirectToLogin();
     }
   }
 
-  void redirectToHome() {
+  void redirectToLogin() {
     Navigator.of(context, rootNavigator: true).pop();
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoadingScreen()));
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
-  Future<void> _loginErrorDialog() async {
+  Future<void> _registerErrorDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: darkBlue,
-          title: const Text('Error while logging in'),
+          title: const Text('Error while registering'),
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
                 Text(
-                  'Wrong username of password. Please try again',
+                  'Passwords do not match or there is an empy field. Please try again',
                   style: TextStyle(color: lightBlue),
                 ),
               ],

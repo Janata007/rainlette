@@ -105,11 +105,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void submit() {
+    _username= _usernameTextController.text;
+    _password = _passwordTextController.text;
     if(_username=="" || _password== ""){
       _loginErrorDialog();
     }else {
-      _rememberUsernameAndPassword();
-      redirectToHome();
+      _checkUsernameAndPassword();
+      //redirectToHome();
     }
   }
 
@@ -147,9 +149,18 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-   void _rememberUsernameAndPassword() async {
+   void _checkUsernameAndPassword() async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
-     await prefs.setString('username', _username);
-     await prefs.setString('password', _password);
+      var username = prefs.getString('username');
+     var pass =  prefs.getString('password');
+
+      if(_username.compareTo(username.toString()) != 0){
+        _loginErrorDialog();
+      }
+      else if(_password.compareTo(pass.toString())!= 0){
+      _loginErrorDialog();
+      } else{
+        redirectToHome();
+      }
    }
 }

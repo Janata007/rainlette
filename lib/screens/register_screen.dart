@@ -1,20 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rainlette/screens/loading.dart';
+import 'package:rainlette/screens/main_screen.dart';
+import 'package:rainlette/screens/widgets/my_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'package:get_storage/get_storage.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  late String _username, _password;
+class _LoginScreenState extends State<LoginScreen> {
+  String _username = "";
+  String _password = "";
   bool _passwordVisible = false;
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+
+  final pref = getSharedPreferences();
 
   @override
   void initState() {
@@ -30,7 +37,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       controller: _usernameTextController,
       validator: (val) => val!.isEmpty ? 'enter username' : null,
       onSaved: (val) => _username = val!,
-      autofocus: true,
     );
     final password = TextFormField(
       obscureText: !_passwordVisible,
@@ -73,24 +79,74 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SizedBox(height: 8.0),
           password,
           const SizedBox(height: 24.0),
-          TextButton(onPressed: () {}, child: Text("Log in")),
+          MyButton(label: "Log in", onPressed: submit),
         ],
       ))),
     );
   }
 
   void _restoreUsernameAndPassword() async {
-    //SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      // _username = prefs.getString('username') ?? '';
-      // _password = prefs.getString('password') ?? '';
+      _username = prefs.getString('username') ?? '';
+      _password = prefs.getString('password') ?? '';
       _usernameTextController.text = _username;
       _passwordTextController.text = _password;
     });
   }
 
   void submit() {
-    storage.write("username", _username);
-    storage.write("password", _password);
+    if (_username == "" || _password == "") {
+      _loginErrorDialog();
+    } else {
+      _rememberUsernameAndPassword();
+      redirectToHome();
+    }
+  }
+
+  void redirectToHome() {
+    Navigator.of(context, rootNavigator: true).pop();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoadingScreen()));
+  }
+
+  Future<void> _loginErrorDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: darkBlue,
+          title: const Text('Error while logging in'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                  'Wrong username of password. Please try again',
+                  style: TextStyle(color: lightBlue),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Ok',
+                style: TextStyle(color: lightBlue),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _rememberUsernameAndPassword() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', _username);
+    await prefs.setString('password', _password);
   }
 }

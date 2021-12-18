@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rainlette/screens/loading.dart';
+import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/widgets/my_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -18,6 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
 
+  final pref = getSharedPreferences();
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
       controller: _usernameTextController,
       validator: (val) => val!.isEmpty ? 'enter username' : null,
       onSaved: (val) => _username = val!,
-      autofocus: true,
     );
     final password = TextFormField(
       obscureText: !_passwordVisible,
@@ -83,10 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _restoreUsernameAndPassword() async {
-    //SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      // _username = prefs.getString('username') ?? '';
-      // _password = prefs.getString('password') ?? '';
+       _username = prefs.getString('username') ?? '';
+       _password = prefs.getString('password') ?? '';
       _usernameTextController.text = _username;
       _passwordTextController.text = _password;
     });
@@ -96,10 +100,17 @@ class _LoginScreenState extends State<LoginScreen> {
     if(_username=="" || _password== ""){
       _loginErrorDialog();
     }else {
-      storage.write("username", _username);
-      storage.write("password", _password);
+      _rememberUsernameAndPassword();
+      redirectToHome();
     }
   }
+
+   void redirectToHome(){
+     Navigator.of(context, rootNavigator: true).pop();
+     Navigator.push(
+         context,
+         MaterialPageRoute(builder: (context) =>  LoadingScreen()));
+   }
 
   Future<void> _loginErrorDialog() async {
     return showDialog<void>(
@@ -128,5 +139,9 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-
+   void _rememberUsernameAndPassword() async {
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+     await prefs.setString('username', _username);
+     await prefs.setString('password', _password);
+   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:rainlette/screens/loading.dart';
+import 'package:rainlette/constants.dart';
 import 'package:rainlette/screens/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
   await GetStorage.init();

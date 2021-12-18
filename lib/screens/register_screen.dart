@@ -83,7 +83,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       backgroundColor: semiBlue,
       appBar: AppBar(
+        title: Column(children: <Widget>[
+          Text("Return to login ->", style: TextStyle(fontSize: 17, color: lightGray),)
+        ],),
         backgroundColor: darkBlue,
+        actions: [
+          IconButton(onPressed: (){
+            redirectToLogin();
+          }, icon: Icon(Icons.account_circle_rounded))
+        ],
       ),
       body: Center(
           child: Form(

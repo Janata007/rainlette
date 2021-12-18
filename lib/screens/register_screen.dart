@@ -7,14 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'package:get_storage/get_storage.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   String _username = "";
   String _password = "";
   bool _passwordVisible = false;

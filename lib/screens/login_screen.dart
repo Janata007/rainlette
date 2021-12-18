@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rainlette/screens/loading.dart';
 import 'package:rainlette/screens/main_screen.dart';
+import 'package:rainlette/screens/register_screen.dart';
 import 'package:rainlette/screens/widgets/my_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
@@ -80,6 +81,13 @@ class _LoginScreenState extends State<LoginScreen> {
           password,
           const SizedBox(height: 24.0),
           MyButton(label: "Log in", onPressed: submit),
+          Center(child:Text("Don't have an account?", style: TextStyle(fontSize: 15),),),
+          MyButton(label: "Register Here", onPressed: (){
+            Navigator.of(context, rootNavigator: true).pop();
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  RegisterScreen()));
+          })
 
         ],
       ))),

@@ -92,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
             SizedBox(
               height: 20.0,
             ),
-            myButtons()
+            myButtons(context)
           ],
         ),
       ),

@@ -1,9 +1,11 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rainlette/screens/my_places_screen.dart';
 
 import '../../constants.dart';
 
-Widget myButtons(){
+Widget myButtons(BuildContext context){
   return
     Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -15,7 +17,11 @@ Widget myButtons(){
         ), padding: EdgeInsets.all(6),
             child: Text("Home", style: TextStyle(color: lightBlue, fontSize: 18),
             ))),
-        TextButton(onPressed: (){}, child:
+        TextButton(onPressed: (){
+          Navigator.of(context, rootNavigator: true).pop();
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MyPlacesScreen()));
+        }, child:
         Container(decoration: BoxDecoration(
             color: darkBlue,
             borderRadius: BorderRadius.all(Radius.circular(10.0))

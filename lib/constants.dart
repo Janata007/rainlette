@@ -7,8 +7,10 @@ const semiBlue = Color.fromRGBO(143,167,196,1);
 const  lightBlue = Color.fromRGBO(210,236,249,1);
 const lightGray = Color.fromRGBO(216,220,220, 1);
 const darkBlue =Color.fromRGBO(36,60,108,1);
+
 final logo = Image.asset("assets/logo_nogb.png",
     width: 180, height: 180);
+Image mainGif = Image.asset("assets/kiss.gif", height: 10, width: 10);
 final storage = GetStorage();
 final pref = getSharedPreferences();
 
@@ -31,7 +33,8 @@ Icon kCloudIcon = Icon(
 );
 
 Icon kSunIcon = Icon(
-  FontAwesomeIcons.sun,
+ // FontAwesomeIcons.sun,
+  Icons.wb_sunny,
   size: 75.0,
   color: darkBlue,
 );

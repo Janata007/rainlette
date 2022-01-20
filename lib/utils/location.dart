@@ -1,8 +1,10 @@
 import 'package:location/location.dart';
+import 'package:geocode/geocode.dart';
 
 class LocationHelper {
   late double latitude;
   late double longitude;
+  late String locationName;
 
   Future<void> getCurrentLocation() async {
     Location location = Location();
@@ -26,10 +28,10 @@ class LocationHelper {
         return;
       }
     }
-
     _locationData = await location.getLocation();
 
     latitude = _locationData.latitude!;
     longitude = _locationData.longitude!;
   }
+
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart';
+import 'package:rainlette/constants.dart';
 
 import 'location.dart';
 
@@ -21,11 +22,11 @@ class WeatherData {
   late LocationHelper locationData;
   late double currentTemperature;
   late int currentCondition;
+  late String currentCity;
 
   Future<void> getCurrentTemperature() async {
         Response response = await get(
     Uri.parse('http://api.openweathermap.org/data/2.5/weather?lat=${locationData.latitude}&lon=${locationData.longitude}&appid=${apiKey}&units=metric'));
-
     if (response.statusCode == 200) {
       String data = response.body;
       var currentWeather = jsonDecode(data);
@@ -45,7 +46,7 @@ class WeatherData {
     if (currentCondition < 600) {
       return WeatherDisplayData(
         weatherIcon: Icon(
-          FontAwesomeIcons.cloud,
+          Icons.wb_cloudy_outlined,
           size: 75.0,
         ),
         weatherImage: AssetImage('assets/cloudy.png'),
@@ -57,7 +58,7 @@ class WeatherData {
         return WeatherDisplayData(
           weatherImage: AssetImage('assets/night.png'),
           weatherIcon: Icon(
-            FontAwesomeIcons.moon,
+            Icons.nights_stay,
             size: 75.0,
             color: Colors.white,
           ),
@@ -65,7 +66,7 @@ class WeatherData {
       } else {
         return WeatherDisplayData(
           weatherIcon: Icon(
-            FontAwesomeIcons.sun,
+            Icons.wb_sunny,
             size: 75.0,
             color: Colors.white,
           ),

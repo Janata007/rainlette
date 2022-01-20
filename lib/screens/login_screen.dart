@@ -4,6 +4,7 @@ import 'package:rainlette/screens/loading.dart';
 import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/register_screen.dart';
 import 'package:rainlette/screens/widgets/my_button.dart';
+import 'package:rainlette/utils/asset_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,8 +17,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-   String _username = "";
-   String _password = "";
+  String _username = "";
+  String _password = "";
   bool _passwordVisible = false;
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
@@ -63,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: semiBlue,
       appBar: AppBar(
         backgroundColor: darkBlue,
+        actions: [ assetContainer("assets/clap.gif")],
       ),
       body: Center(
           child: Form(
@@ -81,14 +83,19 @@ class _LoginScreenState extends State<LoginScreen> {
           password,
           const SizedBox(height: 24.0),
           MyButton(label: "Log in", onPressed: submit),
-          Center(child:Text("Don't have an account?", style: TextStyle(fontSize: 15),),),
-          MyButton(label: "Register Here", onPressed: (){
-            Navigator.of(context, rootNavigator: true).pop();
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  RegisterScreen()));
-          })
-
+          Center(
+            child: Text(
+              "Don't have an account?",
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          MyButton(
+              label: "Register Here",
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegisterScreen()));
+              })
         ],
       ))),
     );
@@ -97,30 +104,29 @@ class _LoginScreenState extends State<LoginScreen> {
   void _restoreUsernameAndPassword() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-       _username = prefs.getString('username') ?? '';
-       _password = prefs.getString('password') ?? '';
+      _username = prefs.getString('username') ?? '';
+      _password = prefs.getString('password') ?? '';
       _usernameTextController.text = _username;
       _passwordTextController.text = _password;
     });
   }
 
   void submit() {
-    _username= _usernameTextController.text;
+    _username = _usernameTextController.text;
     _password = _passwordTextController.text;
-    if(_username=="" || _password== ""){
+    if (_username == "" || _password == "") {
       _loginErrorDialog();
-    }else {
+    } else {
       _checkUsernameAndPassword();
       //redirectToHome();
     }
   }
 
-   void redirectToHome(){
-     Navigator.of(context, rootNavigator: true).pop();
-     Navigator.push(
-         context,
-         MaterialPageRoute(builder: (context) =>  LoadingScreen()));
-   }
+  void redirectToHome() {
+    Navigator.of(context, rootNavigator: true).pop();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoadingScreen()));
+  }
 
   Future<void> _loginErrorDialog() async {
     return showDialog<void>(
@@ -133,13 +139,19 @@ class _LoginScreenState extends State<LoginScreen> {
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
-                Text('Wrong username of password. Please try again', style: TextStyle(color: lightBlue),),
+                Text(
+                  'Wrong username of password. Please try again',
+                  style: TextStyle(color: lightBlue),
+                ),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok', style: TextStyle(color: lightBlue),),
+              child: Text(
+                'Ok',
+                style: TextStyle(color: lightBlue),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -149,18 +161,18 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-   void _checkUsernameAndPassword() async {
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-      var username = prefs.getString('username');
-     var pass =  prefs.getString('password');
 
-      if(_username.compareTo(username.toString()) != 0){
-        _loginErrorDialog();
-      }
-      else if(_password.compareTo(pass.toString())!= 0){
+  void _checkUsernameAndPassword() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var username = prefs.getString('username');
+    var pass = prefs.getString('password');
+
+    if (_username.compareTo(username.toString()) != 0) {
       _loginErrorDialog();
-      } else{
-        redirectToHome();
-      }
-   }
+    } else if (_password.compareTo(pass.toString()) != 0) {
+      _loginErrorDialog();
+    } else {
+      redirectToHome();
+    }
+  }
 }

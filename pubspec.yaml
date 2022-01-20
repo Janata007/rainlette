@@ -28,6 +28,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   get_storage: ^2.0.3
+  geocoding: ^2.0.1
+  geocode: ^1.0.1
   shared_preferences: ^2.0.8
   flutter:
     sdk: flutter

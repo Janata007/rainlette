@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rainlette/screens/loading.dart';
 import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/widgets/my_button.dart';
+import 'package:rainlette/utils/asset_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'package:get_storage/get_storage.dart';
@@ -90,7 +91,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         actions: [
           IconButton(onPressed: (){
             redirectToLogin();
-          }, icon: Icon(Icons.account_circle_rounded))
+          }, icon: Icon(Icons.account_circle_rounded)),
+          assetContainer("assets/run.gif")
         ],
       ),
       body: Center(

@@ -7,7 +7,6 @@ import 'package:rainlette/utils/notification_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
-import 'login_screen.dart';
 
 class UsernameScreen extends StatefulWidget {
   const UsernameScreen({Key? key}) : super(key: key);
@@ -21,6 +20,17 @@ class _UsernameScreenState extends State<UsernameScreen> {
   String _currentUsername = "";
   final TextEditingController _usernameTextController = TextEditingController();
   final pref = getSharedPreferences();
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUsername();
+  }
+
+  void _getCurrentUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _currentUsername = (await prefs.getString('username'))!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +62,30 @@ class _UsernameScreenState extends State<UsernameScreen> {
         ],
       ),
       body: Container(
+        width: 50,
+        height: 20,
+        constraints: BoxConstraints.expand(),
         alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [semiBlue, darkBlue],
+              begin: Alignment(-1, -0.5),
+              end: Alignment(2, 2)),
+          color: semiBlue,
+          image: DecorationImage(
+            alignment: Alignment.bottomCenter,
+            image: mainGif.image,
+            scale: 6,
+            //fit: BoxFit.contain,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text("Current username is: " + _currentUsername),
+            SizedBox(height: 22),
+            Text("Enter new username"),
+            SizedBox(height: 22),
             username,
             SizedBox(height: 22),
             MyButton(label: "Change username", onPressed: _changeUsername)
@@ -73,6 +103,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       _currentUsername = (await prefs.getString('username'))!;
       await prefs.setString('username', _newUsername);
+      _usernameChangedDialog();
     });
   }
 
@@ -82,5 +113,39 @@ class _UsernameScreenState extends State<UsernameScreen> {
         context,
         MaterialPageRoute(
             builder: (context) => MainScreen(weatherData: mainWeatherData)));
+  }
+
+  Future<void> _usernameChangedDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: darkBlue,
+          title: const Text('Changed!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                  'Username has been successfully changed',
+                  style: TextStyle(color: lightBlue),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Ok',
+                style: TextStyle(color: lightBlue),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

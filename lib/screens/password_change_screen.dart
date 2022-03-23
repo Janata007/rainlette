@@ -180,6 +180,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
     setState(() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('password', _password);
+      _passwordChangedDialog();
     });
   }
 
@@ -201,6 +202,39 @@ class _PasswordScreenState extends State<PasswordScreen> {
               children: const <Widget>[
                 Text(
                   'Passwords do not match or there is an empy field. Please try again',
+                  style: TextStyle(color: lightBlue),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Ok',
+                style: TextStyle(color: lightBlue),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  Future<void> _passwordChangedDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: darkBlue,
+          title: const Text('Changed!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                  'Password has been successfully changed',
                   style: TextStyle(color: lightBlue),
                 ),
               ],

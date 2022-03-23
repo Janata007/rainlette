@@ -86,7 +86,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
             SizedBox(height: 22),
             Text("Enter new username"),
             SizedBox(height: 22),
-            username,
+            Container(child: username,width: 500,),
             SizedBox(height: 22),
             MyButton(label: "Change username", onPressed: _changeUsername)
           ],

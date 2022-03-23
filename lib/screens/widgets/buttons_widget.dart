@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rainlette/screens/login_screen.dart';
 import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/my_places_screen.dart';
+import 'package:rainlette/screens/profile_screen.dart';
 import 'package:rainlette/screens/serttings_screen.dart';
 import 'package:rainlette/utils/notification_api.dart';
 
@@ -58,6 +59,21 @@ Widget myButtons(BuildContext context) {
               padding: EdgeInsets.all(6),
               child: Text(
                 "Settings",
+                style: TextStyle(color: lightBlue, fontSize: 18),
+              ))),
+      TextButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+          },
+          child: Container(
+              decoration: const BoxDecoration(
+                  color: darkBlue,
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              padding: EdgeInsets.all(6),
+              child: Text(
+                "My Profile",
                 style: TextStyle(color: lightBlue, fontSize: 18),
               ))),
       TextButton(

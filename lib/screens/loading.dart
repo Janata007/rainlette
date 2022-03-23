@@ -31,6 +31,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     // Fetch the current weather
     WeatherData weatherData = WeatherData(locationData: locationData);
     await weatherData.getCurrentTemperature();
+    mainWeatherData = weatherData;
 
     if (weatherData.currentTemperature == null ||
         weatherData.currentCondition == null) {

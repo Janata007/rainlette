@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:rainlette/constants.dart';
 
 Widget singleCity(String city){
@@ -12,7 +13,11 @@ Widget singleCity(String city){
       child: Row(
         mainAxisAlignment:  MainAxisAlignment.center,
         children: [
-        Text(city, style: TextStyle(),)
+        Text(city, style: TextStyle(fontSize: 20)),
+          SizedBox(width: 20,),
+          Text("12*", style: TextStyle(fontSize: 17),),
+          SizedBox(width: 20,),
+          Icon(Icons.cloud_circle_outlined, size: 30,)
         ],
       )
   );

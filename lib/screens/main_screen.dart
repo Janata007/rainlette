@@ -27,14 +27,12 @@ class _MainScreenState extends State<MainScreen> {
       temperature = weatherData.currentTemperature.round();
       WeatherDisplayData weatherDisplayData =
       weatherData.getWeatherDisplayData();
-     //backgroundImage = cuteCloudGif;
       weatherDisplayIcon = weatherDisplayData.weatherIcon;
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     updateDisplayInfo(widget.weatherData);

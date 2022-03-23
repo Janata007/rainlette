@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rainlette/screens/loading.dart';
-import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/register_screen.dart';
 import 'package:rainlette/screens/widgets/my_button.dart';
 import 'package:rainlette/utils/asset_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../constants.dart';
-import 'package:get_storage/get_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -64,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: semiBlue,
       appBar: AppBar(
         backgroundColor: darkBlue,
-        actions: [ assetContainer("assets/clap.gif")],
+        actions: [assetContainer("assets/clap.gif")],
       ),
       body: Center(
           child: Form(
@@ -83,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
           password,
           const SizedBox(height: 24.0),
           MyButton(label: "Log in", onPressed: submit),
-          Center(
+          const Center(
             child: Text(
               "Don't have an account?",
               style: TextStyle(fontSize: 15),

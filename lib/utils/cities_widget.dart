@@ -1,12 +1,12 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rainlette/screens/home_screen.dart';
 
 import '../constants.dart';
 
-Widget cities() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+Widget cities(BuildContext context) {
+  return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
     Container(
       width: 300,
       height: 150,
@@ -18,11 +18,40 @@ Widget cities() {
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [tileContainer("Skopje"),
-            tileContainer("Mavrovo"),
-            tileContainer("Budapest"),
-            tileContainer("Traverse city"),
-            tileContainer("Ohrid"),
+          children: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen(
+                                city: 'Skopje',
+                              )));
+                },
+                child: tileContainer("Skopje")),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen(
+                                city: 'Budapest',
+                              )));
+                },
+                child: tileContainer("Budapest")),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen(
+                                city: 'Ohrid',
+                              )));
+                },
+                child: tileContainer("Ohrid")),
           ],
         ),
       ),

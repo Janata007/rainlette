@@ -5,7 +5,9 @@ import '../constants.dart';
 import '../utils/http_service.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({required this.city});
+
+  final String city;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -29,17 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Text(weatherData),
-            TextButton(
-                onPressed: getData, child: Text("get weather data for Skopje")),
+            TextButton(onPressed: getData, child: Text("get weather data")),
           ],
         ),
       ),
     );
   }
-
   Future<void> getData() async {
-    weatherData = await httpService.getCurrentWeatherByCity("Skopje");
-    setState((){
-    });
+    weatherData = await httpService.getCurrentWeatherByCity(widget.city);
+    setState(() {});
   }
 }

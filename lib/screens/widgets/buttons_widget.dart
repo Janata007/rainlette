@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rainlette/screens/camera_screen.dart';
+import 'package:rainlette/screens/home_screen.dart';
 import 'package:rainlette/screens/login_screen.dart';
 import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/my_places_screen.dart';
@@ -51,6 +52,21 @@ Widget myButtons(BuildContext context) {
           onPressed: () {
             Navigator.of(context, rootNavigator: true).pop();
             Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
+          child: Container(
+              decoration: const BoxDecoration(
+                  color: darkBlue,
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              padding: EdgeInsets.all(6),
+              child: Text(
+                "Home 2",
+                style: const TextStyle(color: lightBlue, fontSize: 18),
+              ))),
+      TextButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+            Navigator.push(
                 context, MaterialPageRoute(builder: (context) => MySettings()));
           },
           child: Container(
@@ -77,21 +93,21 @@ Widget myButtons(BuildContext context) {
                 "My Profile",
                 style: TextStyle(color: lightBlue, fontSize: 18),
               ))),
-      TextButton(
-          onPressed: () {
-            Navigator.of(context, rootNavigator: true).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CameraScreen()));
-          },
-          child: Container(
-              decoration: const BoxDecoration(
-                  color: darkBlue,
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              padding: EdgeInsets.all(6),
-              child: Text(
-                "Upload photo",
-                style: TextStyle(color: lightBlue, fontSize: 18),
-              ))),
+      // TextButton(
+      //     onPressed: () {
+      //       Navigator.of(context, rootNavigator: true).pop();
+      //       Navigator.push(context,
+      //           MaterialPageRoute(builder: (context) => CameraScreen()));
+      //     },
+      //     child: Container(
+      //         decoration: const BoxDecoration(
+      //             color: darkBlue,
+      //             borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      //         padding: EdgeInsets.all(6),
+      //         child: Text(
+      //           "Upload photo",
+      //           style: TextStyle(color: lightBlue, fontSize: 18),
+      //         ))),
       TextButton(
           onPressed: () async => {
                 NotificationApi.showNotification(

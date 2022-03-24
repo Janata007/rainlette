@@ -6,3 +6,5 @@ the user chooses.
 ## components
 
 The application was built using different pub dev packages.
+Application doesn't support Andorid SDKs below 21
+

@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
     var response = await http.post(mainUrl);
     var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
     print('Response body: ${response.body}');
-
   }
 
   //parameters required: API key, city

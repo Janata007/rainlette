@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rainlette/screens/camera_screen.dart';
-import 'package:rainlette/screens/home_screen.dart';
 import 'package:rainlette/screens/login_screen.dart';
 import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/my_places_screen.dart';

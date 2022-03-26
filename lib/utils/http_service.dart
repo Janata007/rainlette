@@ -24,17 +24,12 @@ import 'package:http/http.dart' as http;
     return response.body;
   }
 
-//parameters required: API key, coordinates, days
-  Future<void> getForecastWeatherByLatLong(int latitude, int longitude, int days) async {
-    String url = baseURL + "/forecast.json";
-    var mainUrl = Uri.parse(url);
-    var response = await http.post(mainUrl);
-  }
-
   //parameters required: API key, city name, days
-  Future<void> getForecastWeatherByCity(String city, int days) async {
+  Future<String> getForecastWeatherByCity(String city, int days) async {
     String url = baseURL + "/forecast.json";
     var mainUrl = Uri.parse(url);
     var response = await http.post(mainUrl);
+    print('Response body: ${response.body}');
+    return response.body;
   }
 }

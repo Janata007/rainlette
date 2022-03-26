@@ -34,43 +34,64 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Welcome to Rainlette",
+            "City info",
             style: TextStyle(color: lightBlue),
           ),
           backgroundColor: darkBlue,
         ),
-        body: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "",
-              style: TextStyle(color: lightBlue),
-            ),
-            backgroundColor: darkBlue,
-          ),
-          body: Container(
+        body: Container(
             alignment: Alignment.center,
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [semiBlue, darkBlue],
+                  begin: Alignment(-1, -0.5),
+                  end: Alignment(2, 2)),
+              color: semiBlue,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("CITY: " + locationCity),
+                Container(
+                  decoration: BoxDecoration(color: darkBlue,
+                      border: Border.all(color: lightBlue)),
+                    padding: EdgeInsets.all(20),
+                    child: Text("CITY: " + locationCity, style: TextStyle(fontSize: 20))),
                 SizedBox(
                   height: 20,
                 ),
-                Text("COUNTRY: " + locationCountry),
+                Container(
+                    decoration: BoxDecoration(color: darkBlue,
+                        border: Border.all(color: lightBlue)),
+                    padding: EdgeInsets.all(20),
+                    child: Text("COUNTRY: " + locationCountry, style: TextStyle(fontSize: 20))),
                 SizedBox(
                   height: 20,
                 ),
-                Text("LOCAL DATE AND TIME: " + localTime),
+                Container(
+                    decoration: BoxDecoration(color: darkBlue,
+                        border: Border.all(color: lightBlue)),
+                    padding: EdgeInsets.all(20),
+                    child: Text("LOCAL DATE AND TIME: " + localTime, style: TextStyle(fontSize: 20))),
                 SizedBox(
                   height: 20,
                 ),
-                Text("CURRENT WEATHER: " + weather),
+                Container(
+                    decoration: BoxDecoration(color: darkBlue,
+                        border: Border.all(color: lightBlue)),
+                    padding: EdgeInsets.all(20),
+                    child: Text("CURRENT WEATHER: " + weather, style: TextStyle(fontSize: 20))),
                 SizedBox(
                   height: 20,
                 ),
-                Text("TEMPERATURE: " + tempC),
-                TextButton(onPressed: getData, child: Text("get weather data")),
+                Container(
+                    decoration: BoxDecoration(color: darkBlue,
+                        border: Border.all(color: lightBlue)),
+                    padding: EdgeInsets.all(20),
+                    child: Text("TEMPERATURE: " + tempC, style: TextStyle(fontSize: 20))),
+                SizedBox(
+                  height: 20,
+                ),
+                TextButton(onPressed: getData, child: Text("get weather data", style: TextStyle(fontSize: 15, color: Colors.white),)),
                 SizedBox(
                   height: 20,
                 ),
@@ -78,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-        ));
+        );
   }
 
   Future<void> getData() async {

@@ -23,6 +23,7 @@ getSharedPreferences() async{
   return prefs;
 }
 
+List<String> citiesList = ["Skopje", "Budapest","Ohrid"];
 
 const kLinearGradient = LinearGradient(
   begin: Alignment.topLeft,

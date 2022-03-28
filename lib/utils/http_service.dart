@@ -20,16 +20,14 @@ import 'package:http/http.dart' as http;
     String url = baseURL + "/current.json?" + "key=" + key + "&q=" + city;
     var mainUrl = Uri.parse(url);
     var response = await http.post(mainUrl);
-    print('Response body: ${response.body}');
     return response.body;
   }
 
   //parameters required: API key, city name, days
   Future<String> getForecastWeatherByCity(String city, int days) async {
-    String url = baseURL + "/forecast.json";
+    String url = baseURL + "/forecast.json?key=" + key + "&q=" + city + "&days=" + days.toString() + "&aqi=no&alerts=no";
     var mainUrl = Uri.parse(url);
     var response = await http.post(mainUrl);
-    print('Response body: ${response.body}');
     return response.body;
   }
 }

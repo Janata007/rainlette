@@ -17,6 +17,27 @@ final logo = Image.asset("assets/logo_nogb.png",
 Image mainGif = Image.asset("assets/kiss.gif", height: 10, width: 10);
 final storage = GetStorage();
 final pref = getSharedPreferences();
+String weatherData = "";
+String locationCountry = "";
+String locationCity = "";
+String localTime = "";
+String weather = "";
+String tempC = "";
+String selectedCity = "";
+String forecastData="";
+String nextDay = "";
+double day1Temp = 0;
+double day2Temp = 0;
+double day3Temp = 0;
+List<String> daysTemp = [];
+List<String> daysDates = [];
+Map<String, dynamic> jsonData = {
+  "location": 'info',
+  "condition": 'condition info'
+};
+Map<String, dynamic> forecastJsonData={
+  "forecast": "",
+};
 
 getSharedPreferences() async{
   final prefs = await SharedPreferences.getInstance();

@@ -24,34 +24,50 @@ class _ForecastScreenState extends State<ForecastScreen> {
         backgroundColor: darkBlue,
       ),
       body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [semiBlue, darkBlue],
-              begin: Alignment(-1, -0.5),
-              end: Alignment(2, 2)),
-          color: semiBlue,
-        ),
-        child:Column(children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: daysTemp.length,
-                itemBuilder: (context, int index){
-                  return Card(color: darkBlue,
-                    margin: EdgeInsets.all(20),
-                    child: Column(
-                      children: <Widget>[
-                      Text("Date:  " + daysDates[index], style: TextStyle(fontSize: 20),),
-                      Text("Temperature:  " + daysTemp[index], style: TextStyle(fontSize: 20),),
-                    ],),
-                  );
-                },
-                padding: EdgeInsets.all(15),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [semiBlue, darkBlue],
+                begin: Alignment(-1, -0.5),
+                end: Alignment(2, 2)),
+            color: semiBlue,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: daysTemp.length,
+                  itemBuilder: (context, int index) {
+                    return Card(
+                      color: darkBlue,
+                      margin: EdgeInsets.all(20),
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                          border: Border.all(color: lightBlue, width: 3),
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              "Date:  " + daysDates[index],
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            Text(
+                              "Temperature:  " + daysTemp[index],
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  padding: EdgeInsets.all(15),
+                ),
               ),
-            ),
-          myButtons(context)
-        ],)
-        ),
+              myButtons(context)
+            ],
+          )),
     );
   }
 }

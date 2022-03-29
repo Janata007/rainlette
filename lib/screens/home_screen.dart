@@ -41,6 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(7.0)),
+            border: Border.all(color: Colors.white, width: 4),
           gradient: LinearGradient(
               colors: [semiBlue, darkBlue],
               begin: Alignment(-1, -0.5),
@@ -61,7 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
                 decoration: BoxDecoration(
-                    color: darkBlue, border: Border.all(color: lightBlue)),
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    color: darkBlue, border: Border.all(color: lightBlue, width: 3)),
                 padding: EdgeInsets.all(20),
                 child: Text("CITY: " + locationCity,
                     style: TextStyle(fontSize: 15))),
@@ -70,7 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
                 decoration: BoxDecoration(
-                    color: darkBlue, border: Border.all(color: lightBlue)),
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    color: darkBlue, border: Border.all(color: lightBlue, width: 3)),
                 padding: EdgeInsets.all(20),
                 child: Text("COUNTRY: " + locationCountry,
                     style: TextStyle(fontSize: 15))),
@@ -79,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
                 decoration: BoxDecoration(
-                    color: darkBlue, border: Border.all(color: lightBlue)),
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    color: darkBlue, border: Border.all(color: lightBlue, width: 3)),
                 padding: EdgeInsets.all(20),
                 child: Text("LOCAL DATE AND TIME: " + localTime,
                     style: TextStyle(fontSize: 15))),
@@ -88,7 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
                 decoration: BoxDecoration(
-                    color: darkBlue, border: Border.all(color: lightBlue)),
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    color: darkBlue, border: Border.all(color: lightBlue, width: 3)),
                 padding: EdgeInsets.all(20),
                 child: Text("CURRENT WEATHER: " + weather,
                     style: TextStyle(fontSize: 15))),
@@ -97,7 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
                 decoration: BoxDecoration(
-                    color: darkBlue, border: Border.all(color: lightBlue)),
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    color: darkBlue, border: Border.all(color: lightBlue, width: 3)),
                 padding: EdgeInsets.all(20),
                 child: Text("TEMPERATURE: " + tempC,
                     style: TextStyle(fontSize: 15))),

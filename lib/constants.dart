@@ -5,15 +5,14 @@ import 'package:rainlette/utils/location.dart';
 import 'package:rainlette/utils/weather.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const semiBlue = Color.fromRGBO(143,167,196,1);
-const  lightBlue = Color.fromRGBO(210,236,249,1);
-const lightGray = Color.fromRGBO(216,220,220, 1);
-const darkBlue =Color.fromRGBO(36,60,108,1);
+const semiBlue = Color.fromRGBO(143, 167, 196, 1);
+const lightBlue = Color.fromRGBO(210, 236, 249, 1);
+const lightGray = Color.fromRGBO(216, 220, 220, 1);
+const darkBlue = Color.fromRGBO(36, 60, 108, 1);
 
-WeatherData mainWeatherData= new WeatherData(locationData: LocationHelper());
+WeatherData mainWeatherData = new WeatherData(locationData: LocationHelper());
 
-final logo = Image.asset("assets/logo_nogb.png",
-    width: 180, height: 180);
+final logo = Image.asset("assets/logo_nogb.png", width: 180, height: 180);
 Image mainGif = Image.asset("assets/kiss.gif", height: 10, width: 10);
 final storage = GetStorage();
 final pref = getSharedPreferences();
@@ -24,7 +23,7 @@ String localTime = "";
 String weather = "";
 String tempC = "";
 String selectedCity = "";
-String forecastData="";
+String forecastData = "";
 String nextDay = "";
 double day1Temp = 0;
 double day2Temp = 0;
@@ -35,16 +34,16 @@ Map<String, dynamic> jsonData = {
   "location": 'info',
   "condition": 'condition info'
 };
-Map<String, dynamic> forecastJsonData={
+Map<String, dynamic> forecastJsonData = {
   "forecast": "",
 };
 
-getSharedPreferences() async{
+getSharedPreferences() async {
   final prefs = await SharedPreferences.getInstance();
   return prefs;
 }
 
-List<String> citiesList = ["Skopje", "Budapest","Ohrid"];
+List<String> citiesList = ["Skopje", "Budapest", "Ohrid"];
 
 const kLinearGradient = LinearGradient(
   begin: Alignment.topLeft,
@@ -52,14 +51,10 @@ const kLinearGradient = LinearGradient(
   colors: [darkBlue, lightBlue],
 );
 
-Icon kCloudIcon = Icon(
-  FontAwesomeIcons.cloud,
-  size: 75.0,
-  color: darkBlue
-);
+Icon kCloudIcon = Icon(FontAwesomeIcons.cloud, size: 75.0, color: darkBlue);
 
 Icon kSunIcon = Icon(
- // FontAwesomeIcons.sun,
+  // FontAwesomeIcons.sun,
   Icons.wb_sunny,
   size: 75.0,
   color: darkBlue,

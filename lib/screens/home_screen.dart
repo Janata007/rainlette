@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rainlette/screens/forecast_screen.dart';
+import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/widgets/buttons_widget.dart';
 import 'package:rainlette/screens/widgets/my_button.dart';
+import 'package:rainlette/utils/asset_container.dart';
 
 import '../constants.dart';
 import '../utils/http_service.dart';
@@ -32,11 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "City info",
-          style: TextStyle(color: lightBlue),
-        ),
+        title: Column(children: <Widget>[
+          Text("Return to main ->", style: TextStyle(fontSize: 17, color: lightGray),)
+        ],),
         backgroundColor: darkBlue,
+        actions: [
+          IconButton(onPressed: (){
+            redirectToHome();
+          }, icon: Icon(Icons.account_circle_rounded)),
+          assetContainer("assets/run.gif")
+        ],
       ),
       body: Container(
         alignment: Alignment.center,
@@ -186,5 +193,10 @@ class _HomeScreenState extends State<HomeScreen> {
       citiesList.add(selectedCity);
       //redirectToHome();
     }
+  }
+  void redirectToHome() {
+    Navigator.of(context, rootNavigator: true).pop();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => MainScreen(weatherData: mainWeatherData)));
   }
 }

@@ -2,9 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:rainlette/utils/asset_container.dart';
 
 import '../constants.dart';
+import 'main_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -14,7 +18,7 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  File _image = File("");
+  File _image = File('');
   final ImagePicker imagePicker = getImagePicker();
 
   Future getImage() async {
@@ -28,11 +32,16 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Welcome to Rainlette",
-          style: TextStyle(color: lightBlue),
-        ),
+        title: Column(children: <Widget>[
+          Text("Return to main ->", style: TextStyle(fontSize: 17, color: lightGray),)
+        ],),
         backgroundColor: darkBlue,
+        actions: [
+          IconButton(onPressed: (){
+            redirectToHome();
+          }, icon: Icon(Icons.account_circle_rounded)),
+          assetContainer("assets/run.gif")
+        ],
       ),
       body: Center(
         child: _image == null
@@ -45,6 +54,11 @@ class _CameraScreenState extends State<CameraScreen> {
         child: Icon(Icons.camera_alt),
       ),
     );
+  }
+  void redirectToHome() {
+    Navigator.of(context, rootNavigator: true).pop();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => MainScreen(weatherData: mainWeatherData)));
   }
 }
 

@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rainlette/screens/loading.dart';
 import 'package:rainlette/screens/widgets/buttons_widget.dart';
-import 'package:rainlette/screens/widgets/cities_view.dart';
-import 'package:rainlette/screens/widgets/city_info_widget.dart';
 import 'package:rainlette/utils/asset_container.dart';
 
 import '../constants.dart';

@@ -21,7 +21,10 @@ Widget myCities(BuildContext context) {
           itemCount: citiesList.length,
           itemBuilder: (context, int index){
             return Card(
-              child: Column(children: <Widget>[
+              color: lightBlue,
+              borderOnForeground: true,
+              child: Column(
+                children: <Widget>[
                 TextButton(
                     onPressed: () {
                       Navigator.of(context, rootNavigator: true).pop();

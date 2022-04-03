@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rainlette/screens/main_screen.dart';
 import 'package:rainlette/screens/widgets/buttons_widget.dart';
 
 import '../constants.dart';
@@ -38,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
               Container(
                 child: logo,
-                width: 200,
+                width: 100,
               )
             ]),
             SizedBox(
@@ -52,50 +53,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: 15,
             ),
-            Container(
-              width: 500,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                border: Border.all(color: Colors.white, width: 4),
-                image: DecorationImage(
-                  alignment: Alignment.topRight,
-                  image: logo.image,
-                  scale: 3,
-                  //fit: BoxFit.contain,
+            Expanded(
+              child: Container(
+                width: 500,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  border: Border.all(color: Colors.white, width: 4),
+                  image: DecorationImage(
+                    alignment: Alignment.topRight,
+                    image: logo.image,
+                    scale: 3,
+                    //fit: BoxFit.contain,
+                  ),
+                  color: darkBlue,
                 ),
-                color: darkBlue,
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: 10,),
-                  Text(
-                    "Username",
-                    style: TextStyle(color: lightBlue, fontSize: 20),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    "insert username here",
-                    style: TextStyle(color: lightBlue),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Change username",
-                            style: TextStyle(color: lightBlue),
-                          )),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Change password",
-                            style: TextStyle(color: lightBlue),
-                          )),
-                    ],
-                  ),
-                ],
+                child: SingleChildScrollView(child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Username",
+                      style: TextStyle(color: lightBlue, fontSize: 20),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      "insert username here",
+                      style: TextStyle(color: lightBlue),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Change username",
+                              style: TextStyle(color: lightBlue),
+                            )),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Change password",
+                              style: TextStyle(color: lightBlue),
+                            )),
+                      ],
+                    ),
+                  ],
+                ),),
               ),
             ),
             SizedBox(
@@ -111,7 +116,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "Location",
                     style: TextStyle(color: lightBlue, fontSize: 20),
